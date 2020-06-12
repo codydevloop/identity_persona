@@ -7,6 +7,9 @@ const authController = require("./controller/auth-controller");
 const userController = require("./controller/user-controller");
 const historyController = require("./controller/history-controller");
 const movieController = require("./controller/movies-controller");
+const quizController = require("./controller/quiz-controller");
+const searchController = require("./controller/search-controller");
+
 
 const db = require("./models");
 
@@ -32,6 +35,8 @@ app.use(authController);
 app.use(userController);
 app.use(historyController);
 app.use(movieController);
+app.use(quizController);
+app.use(searchController);
 
 const syncOptions = { force: false };
 
