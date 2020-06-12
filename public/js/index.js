@@ -1,8 +1,11 @@
+
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+//let $findMovie = $("#find-movie");
+$(document).ready(function() {
 var $movies=$("#movies")
 
 // The API object contains methods for each kind of request we'll make
@@ -111,7 +114,34 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+
+
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+<<<<<<< HEAD
+
+$("#find-movie").on("click", function (event) {
+
+  event.preventDefault();
+  let movie = $("#movie-input").val();
+  $("#movie-input").val('');
+
+
+  $.ajax({
+      url:"/api/similarmovies/" +movie,
+      method: "GET"
+
+  })
+  .then(function (response){
+      // location.reload();
+  });
+});
+
+
+
+});
+=======
 $movies.on("click",sugar())
+>>>>>>> master
