@@ -8,6 +8,9 @@ const userController = require("./controller/user-controller");
 const historyController = require("./controller/history-controller");
 const movieSearchController = require("./controller/moviesearch-controller");
 const testMovieSearchController = require("./controller/testmoviesearch-controller");
+const quizController = require("./controller/quiz-controller");
+const searchController = require("./controller/search-controller");
+
 
 const db = require("./models");
 
@@ -34,6 +37,8 @@ app.use(userController);
 app.use(historyController);
 app.use(movieSearchController);
 app.use(testMovieSearchController);
+app.use(quizController);
+app.use(searchController);
 
 const syncOptions = { force: false };
 
