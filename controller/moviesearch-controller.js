@@ -9,7 +9,7 @@ require('dotenv').config();
 
 // a route to display homepage and kick off front end testing
 router.get("/moviesearch", (req, res) => {
-    res.render("moviehomepage");
+    res.render("moviedefault");
 });
 
 // 1st call from user,  we need the genre id from this to performa a genre api search
@@ -41,12 +41,13 @@ router.get("/api/similarmovies/:movie", async (req, res) => {
     //         //     return response;
     //         // });  
     //         console.log("api good");
-            return response;
+         //return response;
+         res.render("moviedefault");
         });   
 
 
-    //console.log(rows);
-    res.render("moviedefault");
+    //console.log(rows.data);
+   
     
 });
  
