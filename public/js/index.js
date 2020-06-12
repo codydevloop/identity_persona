@@ -6,8 +6,20 @@ var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 //let $findMovie = $("#find-movie");
 $(document).ready(function() {
+var $movies=$("#movies")
+
 // The API object contains methods for each kind of request we'll make
 var API = {
+  GETmovies: function(name){
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/movies",
+      data: JSON.stringify ({name})
+    });
+  },
   saveExample: function(example) {
     return $.ajax({
       headers: {
@@ -31,6 +43,12 @@ var API = {
     });
   }
 };
+function sugar(){
+  API.GETmovies("mulan").then(data =>{
+    console.log(data)
+  })
+   
+}
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
@@ -102,6 +120,7 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+<<<<<<< HEAD
 
 $("#find-movie").on("click", function (event) {
 
@@ -123,3 +142,6 @@ $("#find-movie").on("click", function (event) {
 
 
 });
+=======
+$movies.on("click",sugar())
+>>>>>>> master
