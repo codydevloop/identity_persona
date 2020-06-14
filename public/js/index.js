@@ -11,6 +11,8 @@ $(document).ready(function () {
   let $exampleList = $("#example-list");
   let $findMovie = $("#find-movie");
 
+  let $buttonType = $(".buttontype");
+
 
   // object to hold current search results, for running functions on
   let genreTopTenThouObj = {};
@@ -21,9 +23,7 @@ $(document).ready(function () {
 
 
     GETmovies: function (name) {
-
       window.location.href = `/movies?name=${name}`;
- 
     },
 
     // Start Danyal expamples
@@ -50,7 +50,13 @@ $(document).ready(function () {
       });
     }
   };
-  function sugarSearch(event) {
+  //##################################
+  //###############class defined
+  //##################################
+  function getButtonType () {
+
+  }
+  function sugarSearch() {
     event.preventDefault();
     let userSearchTerm = $("#movie-input").val();
     $("#movie-input").val('');  //clear field
@@ -125,9 +131,15 @@ $(document).ready(function () {
 
 
   // Add event listeners to the submit and delete buttons
-  // $submitBtn.on("click", handleFormSubmit);
+  $submitBtn.on("click", handleFormSubmit);
   $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
+
+  // class generated
   $findMovie.on("click", sugarSearch);
+  $buttonType.on("click", function(){
+    console.log($(this).attr("data-buttontype"));
+    console.log($(this).attr("data-movieid"));
+  })
 
 });

@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require("../models");
 require("dotenv").config();
 const axios = require("axios").default;
-const genreDBObj = {};
+
 
 router.get("/movies", async (req, res) => {
     const searchTerm = req.query.name;
@@ -31,54 +31,59 @@ router.get("/movies", async (req, res) => {
     //
 
     let tenResults = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 4; i++) {
         tenResults.push(genres.data.results[i]);
     }
-    console.log(tenResults);
+    //console.log(tenResults);
 
-    res.render("moviedefault", { results: tenResults });  // ajax hijacks render
+    res.render("index", { results: tenResults });  // ajax hijacks render
 });
 
-
-
-
-router.get("/api/searchTMDB/:name", async (req, res) => {
-    // make userSearchTearm search
-    let searchTerm = req.params.name;
-
-
-    const data = await
-        axios({
-            method: "GET",
-            url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY_TMDB}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
-
-        });
+module.exports = router;
 
 
 
 
 
-    let genre = data.data.results[0].genre_ids[0];
 
-    // console.log(genre);
 
-    const genres = await
-        axios({
-            method: 'GET',
-            url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY_TMDB}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}`
+// router.get("/api/searchTMDB/:name", async (req, res) => {
+//     // make userSearchTearm search
+//     let searchTerm = req.params.name;
 
-        });
+
+//     const data = await
+//         axios({
+//             method: "GET",
+//             url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY_TMDB}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
+
+//         });
+
+
+
+
+
+//     let genre = data.data.results[0].genre_ids[0];
+
+//     // console.log(genre);
+
+//     const genres = await
+//         axios({
+//             method: 'GET',
+//             url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY_TMDB}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}`
+
+//         });
     // console.log(genres);
     //call the genre search
     //
 
-    let tenResults = [];
-    for (let i = 0; i < 10; i++) {
-        tenResults.push(genres.data.results[i]);
-    }
-    console.log(tenResults);
+    // let tenResults = [];
+    // for (let i = 0; i < 4; i++) {
+    //     tenResults.push(genres.data.results[i]);
+    // }
+    // console.log(tenResults);
 
-    res.render("moviedefault", { results: tenResults });  // ajax hijacks render
+    // res.render("moviedefault", { data: tenResults });  // ajax hijacks render
 
 
 
@@ -89,7 +94,7 @@ router.get("/api/searchTMDB/:name", async (req, res) => {
     //console.log(fiveResults);
     // console.log(rows.data);
 
-});
+// });
 
 //module.exports = genreDBObj;
-module.exports = router;
+
