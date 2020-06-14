@@ -8,6 +8,8 @@ const router = express.Router();
 const db = require("../models");
 const jwtSecret = require("../config/jwt-config");
 
+const genreDBobj = require("./tmdb-controller");
+
 // Flash
 router.use(
   session({
@@ -23,7 +25,6 @@ router.use(flash());
 require("../config/passport")(passport);
 router.use(passport.initialize());
 router.use(passport.session());
-
 router.use(cookieParser());
 
 router.get("/", (req, res) => {
@@ -35,6 +36,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
+  console.log("/login");
   res.render("login", { message: req.flash("error") });
 });
 
@@ -64,6 +66,7 @@ router.post(
 );
 
 router.get("/signup", (req, res) => {
+  console.log("/signup");
   res.render("signup", { message: req.flash("error") });
 });
 
@@ -77,6 +80,7 @@ router.post(
 );
 
 router.get("/logout", async (req, res) => {
+  console.log("/logout");
   const record = {
     status: "LogOut",
     userId: req.user.dataValues.id

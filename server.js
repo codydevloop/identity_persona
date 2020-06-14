@@ -6,11 +6,11 @@ const { allowInsecurePrototypeAccess } = require("@handlebars/allow-prototype-ac
 const authController = require("./controller/auth-controller");
 const userController = require("./controller/user-controller");
 const historyController = require("./controller/history-controller");
-const movieSearchController = require("./controller/moviesearch-controller");
 const testMovieSearchController = require("./controller/testmoviesearch-controller");
 const movieController = require("./controller/movies-controller");
 const quizController = require("./controller/quiz-controller");
 const searchController = require("./controller/search-controller");
+const genreDBobj = require("./controller/tmdb-controller");
 
 
 const db = require("./models");
@@ -33,14 +33,14 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-app.use(authController);
+app.use(genreDBobj);
+app.use(quizController);
 app.use(userController);
 app.use(historyController);
-app.use(movieSearchController);
 app.use(testMovieSearchController);
 app.use(movieController);
-app.use(quizController);
 app.use(searchController);
+app.use(authController);
 
 const syncOptions = { force: false };
 
