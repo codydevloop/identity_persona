@@ -3,11 +3,21 @@ const router = express.Router();
 const axios = require('axios').default;
 require('dotenv').config();
 
+const passport = require("passport");
+const db = require("../models");
+
+require("../config/passport")(passport);
+router.use(passport.initialize());
+router.use(passport.session());
+
 
 
 //hardcoded search term  - eliminated user input for now
 
-router.get("/testmoviesearch", async (req, res) => {
+router.get("/testmoviesearch",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+
     const rows = await  
 
         axios({

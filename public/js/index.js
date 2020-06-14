@@ -120,7 +120,6 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
-<<<<<<< HEAD
 
 $("#find-movie").on("click", function (event) {
 
@@ -142,6 +141,4 @@ $("#find-movie").on("click", function (event) {
 
 
 });
-=======
 $movies.on("click",sugar())
->>>>>>> master
