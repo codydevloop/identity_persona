@@ -11,7 +11,7 @@ $(document).ready(function () {
   let $exampleList = $("#example-list");
   let $findMovie = $("#find-movie");
 
-  let $buttonType = $(".buttontype");
+  let $buttonTypeAndData = $(".buttontype");
 
 
   // object to hold current search results, for running functions on
@@ -137,7 +137,10 @@ $(document).ready(function () {
 
   // class generated
   $findMovie.on("click", sugarSearch);
-  $buttonType.on("click", function(){
+
+
+  $buttonTypeAndData.on("click", function(event){
+    event.preventDefault();
     console.log($(this).attr("data-buttontype"));
     console.log($(this).attr("data-movieid"));
   })

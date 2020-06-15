@@ -57,23 +57,23 @@
 
 
 
-                    {{#each results}}
+                    {{#each results.sample}}
 
                     <div class="col-md-3" style="float:left">
                         <div class="card mb-2">
-                            <img class="card-img-top card-sizing" src="http://image.tmdb.org/t/p/w154{{poster_path}}"
+                            <img class="card-img-top card-sizing" src=`http://image.tmdb.org/t/p/w154{{poster_path}}`
                                 alt="Card image cap">
                             <div class="card-body">
-                                {{!-- <h4 class="card-title">{{title}}</h4> --}}
+                                <h4 class="card-title">{{title}}</h4>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-primary buttontype" ="thumbsup" data-movieid="{{id}}">
+                                    <a class="btn btn-primary buttontype"  data-buttontype="thumbsup"data-movieid={{id}}>
                                         <i class="fas fa-thumbs-up" ></i>
                                     </a>
-                                    <a class="btn btn-warning buttontype" data-buttontype="watchlist" data-movieid="{{id}}">
+                                    <a class="btn btn-warning buttontype" data-buttontype="watchlist" data-movieid={{id}}>
                                         <i class="fas fa-plus"></i>
                                         <i class="fas fa-list"></i>
                                     </a>
-                                    <a class="btn btn-danger buttontype" data-buttontype="thumbsdown" data-movieid="{{id}}">
+                                    <a class="btn btn-danger buttontype" data-buttontype="thumbsdown" data-movieid={{id}}>
                                         <i class="fas fa-thumbs-down"></i>
                                     </a>
                                 </div>
@@ -81,6 +81,11 @@
                         </div>
                     </div>
                     {{/each}}
+
+                    <h2>Testing Area</h2>
+                    
+                        {{results.sample}}
+
 
 
 
