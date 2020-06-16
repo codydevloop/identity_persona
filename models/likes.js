@@ -1,7 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
-    var Likes = sequelize.define('Likes', {
-        movieId:{type:DataTypes.STRING},
- 
-    })
-    return Likes
-}
+    const Likes = sequelize.define(
+        "likes", 
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            movieId: {
+                type:DataTypes.INTEGER
+            },
+            userEmail: {
+                type:DataTypes.STRING
+            }
+
+    });
+
+    return Likes;
+};
+

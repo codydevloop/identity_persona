@@ -3,7 +3,7 @@
 
 
 $(document).ready(function () {
-  
+
   // Get references to page elements
   let $exampleText = $("#example-text");
   let $exampleDescription = $("#example-description");
@@ -23,8 +23,33 @@ $(document).ready(function () {
 
 
     GETmovies: function (name) {
-      window.location.href = `/movies?name=${name}`;
+      window.location.href = `/api/movies?name=${name}`;
     },
+
+    postLikes: function (table, movie) {
+
+
+      $.ajax("/api/email/", {
+        type: "GET"
+      }).then(function (response) {
+
+        let data = {
+          table: table,
+          movieId: movie,
+          userEmail: response
+        };
+
+        $.ajax("/api/likes/", {
+          type: "POST",
+          data: data
+        }).then(
+          console.log("done with like post")
+        )
+      })
+
+    },
+
+    // saveLikes: function ()
 
     // Start Danyal expamples
     saveExample: function (example) {
@@ -53,9 +78,28 @@ $(document).ready(function () {
   //##################################
   //###############class defined
   //##################################
-  function getButtonType () {
+  function determineButton() {
+    event.preventDefault();
+    let tableIdentifier = $(this).attr("data-buttontype");
+    let movieIdentifier = $(this).attr("data-movieid");
 
+    switch (tableIdentifier) {
+      case "thumbsup":
+        API.postLikes(tableIdentifier, movieIdentifier)
+        break;
+
+      case "watchlist":
+        console.log(tableIdentifier);
+        console.log(movieIdentifier);
+        break;
+
+      case "thumbsdown":
+        console.log(tableIdentifier);
+        console.log(movieIdentifier);
+        break;
+    }
   }
+
   function sugarSearch() {
     event.preventDefault();
     let userSearchTerm = $("#movie-input").val();
@@ -92,28 +136,30 @@ $(document).ready(function () {
     });
   };
 
+  // Instructor Code
   // handleFormSubmit is called whenever we submit a new example
   // Save the new example to the db and refresh the list
-  let handleFormSubmit = function(event) {
-    event.preventDefault();
 
-    var example = {
-      text: $exampleText.val().trim(),
-      description: $exampleDescription.val().trim()
-    };
+  // let handleFormSubmit = function(event) {
+  //   event.preventDefault();
 
-    if (!(example.text && example.description)) {
-      alert("You must enter an example text and description!");
-      return;
-    }
+  //   var example = {
+  //     text: $exampleText.val().trim(),
+  //     description: $exampleDescription.val().trim()
+  //   };
 
-    API.saveExample(example).then(function() {
-      refreshExamples();
-    });
+  //   if (!(example.text && example.description)) {
+  //     alert("You must enter an example text and description!");
+  //     return;
+  //   }
 
-    $exampleText.val("");
-    $exampleDescription.val("");
-  };
+  //   API.saveExample(example).then(function() {
+  //     refreshExamples();
+  //   });
+
+  //   $exampleText.val("");
+  //   $exampleDescription.val("");
+  // };
 
   // handleDeleteBtnClick is called when an example's delete button is clicked
   // Remove the example from the db and refresh the list
@@ -128,21 +174,14 @@ $(document).ready(function () {
   };
 
 
-
-
   // Add event listeners to the submit and delete buttons
-  $submitBtn.on("click", handleFormSubmit);
+  // Instructor Code
+  // $submitBtn.on("click", handleFormSubmit);  
   $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 
-  // class generated
+  // Group Project generated
   $findMovie.on("click", sugarSearch);
-
-
-  $buttonTypeAndData.on("click", function(event){
-    event.preventDefault();
-    console.log($(this).attr("data-buttontype"));
-    console.log($(this).attr("data-movieid"));
-  })
+  $buttonTypeAndData.on("click", determineButton);
 
 });

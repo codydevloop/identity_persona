@@ -5,14 +5,16 @@ require("dotenv").config();
 const axios = require("axios");
 // const passport = require("passport");
 
+router.get("/api/email", (req, res)=>{
+    res.json(req.user.email);
+});
 
 
 
 
 
-
-router.get("/movies", async (req, res) => {
-    console.log(req.user.dataValues.email);
+router.get("/api/movies", async (req, res) => {
+    // console.log(req.user.dataValues.email);
     const searchTerm = req.query.name;
 
     const data = await
@@ -54,7 +56,7 @@ router.get("/movies", async (req, res) => {
 
 
     // console.log(tenResults);
-    console.log("User info: " +req.user);
+    //console.log("User info: " +req.user);
 
     res.render("index", { results: tenResultsObj });  // ajax hijacks render
 });

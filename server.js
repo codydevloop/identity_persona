@@ -6,8 +6,7 @@ const { allowInsecurePrototypeAccess } = require("@handlebars/allow-prototype-ac
 const authController = require("./controller/auth-controller");
 const userController = require("./controller/user-controller");
 const historyController = require("./controller/history-controller");
-const movieController = require("./controller/movies-controller");
-const quizController = require("./controller/quiz-controller");
+const likesController = require("./controller/likes-controller");
 const searchController = require("./controller/search-controller");
 const tmdb = require("./controller/tmdb-controller");
 
@@ -59,10 +58,9 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-app.use(quizController);
+app.use(likesController);
 app.use(userController);
 app.use(historyController);
-app.use(movieController);
 app.use(searchController);
 app.use(authController);
 app.use(tmdb);
