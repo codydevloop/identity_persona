@@ -12,6 +12,17 @@ const quizController = require("./controller/quiz-controller");
 const searchController = require("./controller/search-controller");
 const genreDBobj = require("./controller/tmdb-controller");
 
+// Handlebars.registerHelper("contains", function (){
+//   return ["help"];
+//   // for (let i = 0; i < arrayNum.length() ; i++){
+//   //    if (arrayNum[i]=== index) {
+//   //      return true; 
+//   //    }else{
+//   //      return false;
+//   //    }
+//   // }
+     
+//  });
 
 const db = require("./models");
 
@@ -28,7 +39,34 @@ app.engine(
   "handlebars",
   exphbs({
     defaultLayout: "main",
-    handlebars: allowInsecurePrototypeAccess(Handlebars)
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers: {
+      contains1: function(index){
+        let pages = [0,1,2,3];
+        let value = false;
+        for (let i = 0; i < pages.length; i++){
+          // console.log(`array index: ${pages[i]} -- handlebars indes: ${index}`);
+          if (pages[i]===index){
+             
+              value = true;
+          }
+        }
+        return value;
+      },
+      contains2: function(index){
+        let pages = [4,5,6,7];
+        let value = false;
+        for (let i = 0; i < pages.length; i++){
+          // console.log(`array index: ${pages[i]} -- handlebars indes: ${index}`);
+          if (pages[i]===index){
+             
+              value = true;
+          }
+        }
+        return value;
+      },
+
+    }
   })
 );
 app.set("view engine", "handlebars");

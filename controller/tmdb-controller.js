@@ -4,7 +4,11 @@ const router = express.Router();
 const db = require("../models");
 require("dotenv").config();
 const axios = require("axios").default;
-var helpers = require('handlebars-helpers')();
+
+
+
+
+
 
 
 router.get("/movies", async (req, res) => {
@@ -30,10 +34,12 @@ router.get("/movies", async (req, res) => {
     // console.log(genres);
     //call the genre search
     //
-    // reduces the result to managable size
+    // reduces the result to managable size and adds poster path prefix
     let tenResults = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 6; i++) {
+
         tenResults.push(genres.data.results[i]);
+        tenResults[i].poster_path ="http://image.tmdb.org/t/p/w154"+tenResults[i].poster_path;
     }
 
     // create groups of four,  logic needed for Carousel slides
@@ -45,7 +51,8 @@ router.get("/movies", async (req, res) => {
         test1: sortFour1
     };
 
-    console.log(tenResults);
+
+    // console.log(tenResults);
 
 
     res.render("index", { results: tenResultsObj });  // ajax hijacks render
