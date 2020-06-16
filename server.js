@@ -6,23 +6,11 @@ const { allowInsecurePrototypeAccess } = require("@handlebars/allow-prototype-ac
 const authController = require("./controller/auth-controller");
 const userController = require("./controller/user-controller");
 const historyController = require("./controller/history-controller");
-const testMovieSearchController = require("./controller/testmoviesearch-controller");
 const movieController = require("./controller/movies-controller");
 const quizController = require("./controller/quiz-controller");
 const searchController = require("./controller/search-controller");
-const genreDBobj = require("./controller/tmdb-controller");
+const tmdb = require("./controller/tmdb-controller");
 
-// Handlebars.registerHelper("contains", function (){
-//   return ["help"];
-//   // for (let i = 0; i < arrayNum.length() ; i++){
-//   //    if (arrayNum[i]=== index) {
-//   //      return true; 
-//   //    }else{
-//   //      return false;
-//   //    }
-//   // }
-     
-//  });
 
 const db = require("./models");
 
@@ -71,14 +59,13 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-app.use(genreDBobj);
 app.use(quizController);
 app.use(userController);
 app.use(historyController);
-app.use(testMovieSearchController);
 app.use(movieController);
 app.use(searchController);
 app.use(authController);
+app.use(tmdb);
 
 const syncOptions = { force: false };
 

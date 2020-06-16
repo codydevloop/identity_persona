@@ -1,9 +1,9 @@
 
 const express = require("express");
 const router = express.Router();
-const db = require("../models");
 require("dotenv").config();
-const axios = require("axios").default;
+const axios = require("axios");
+// const passport = require("passport");
 
 
 
@@ -12,6 +12,7 @@ const axios = require("axios").default;
 
 
 router.get("/movies", async (req, res) => {
+    console.log(req.user.dataValues.email);
     const searchTerm = req.query.name;
 
     const data = await
@@ -53,7 +54,7 @@ router.get("/movies", async (req, res) => {
 
 
     // console.log(tenResults);
-
+    console.log("User info: " +req.user);
 
     res.render("index", { results: tenResultsObj });  // ajax hijacks render
 });
