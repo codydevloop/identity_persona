@@ -59,6 +59,9 @@ router.post(
 
       res.cookie("jwt", token, { httpOnly: true, secure: false });
       res.redirect("/");
+
+      let decoded = jwt.decode(token);
+      console.log(decoded.email);
     });
   }
 );
