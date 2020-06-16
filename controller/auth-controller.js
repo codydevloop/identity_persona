@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  console.log("/login");
+  //console.log("/login");
   res.render("login", { message: req.flash("error") });
 });
 
