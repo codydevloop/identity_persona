@@ -6,15 +6,23 @@ const { allowInsecurePrototypeAccess } = require("@handlebars/allow-prototype-ac
 const authController = require("./controller/auth-controller");
 const userController = require("./controller/user-controller");
 const historyController = require("./controller/history-controller");
-<<<<<<< HEAD
-const movieSearchController = require("./controller/moviesearch-controller");
 const testMovieSearchController = require("./controller/testmoviesearch-controller");
-=======
 const movieController = require("./controller/movies-controller");
->>>>>>> master
 const quizController = require("./controller/quiz-controller");
 const searchController = require("./controller/search-controller");
+const genreDBobj = require("./controller/tmdb-controller");
 
+// Handlebars.registerHelper("contains", function (){
+//   return ["help"];
+//   // for (let i = 0; i < arrayNum.length() ; i++){
+//   //    if (arrayNum[i]=== index) {
+//   //      return true; 
+//   //    }else{
+//   //      return false;
+//   //    }
+//   // }
+     
+//  });
 
 const db = require("./models");
 
@@ -31,19 +39,46 @@ app.engine(
   "handlebars",
   exphbs({
     defaultLayout: "main",
-    handlebars: allowInsecurePrototypeAccess(Handlebars)
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers: {
+      contains1: function(index){
+        let pages = [0,1,2,3];
+        let value = false;
+        for (let i = 0; i < pages.length; i++){
+          // console.log(`array index: ${pages[i]} -- handlebars indes: ${index}`);
+          if (pages[i]===index){
+             
+              value = true;
+          }
+        }
+        return value;
+      },
+      contains2: function(index){
+        let pages = [4,5,6,7];
+        let value = false;
+        for (let i = 0; i < pages.length; i++){
+          // console.log(`array index: ${pages[i]} -- handlebars indes: ${index}`);
+          if (pages[i]===index){
+             
+              value = true;
+          }
+        }
+        return value;
+      },
+
+    }
   })
 );
 app.set("view engine", "handlebars");
 
-app.use(authController);
+app.use(genreDBobj);
+app.use(quizController);
 app.use(userController);
 app.use(historyController);
-app.use(movieSearchController);
 app.use(testMovieSearchController);
 app.use(movieController);
-app.use(quizController);
 app.use(searchController);
+app.use(authController);
 
 const syncOptions = { force: false };
 

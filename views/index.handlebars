@@ -1,21 +1,134 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Welcome!</h1>
-        {{#if user}}
-        <h2>This is our Home Page!</h2>
-         <h2>We have many chickens! </h2>
-         <h2>We could have hens </h2>
-         
-        <a href="/logout" class="btn btn-success">Log Out</a>
-        <a href="/users" class="btn btn-success">Users</a>
-        <button id="movies" class="btn btn-primary">movies</button>
-        {{else}}
-        <p>Please <a href="/login">log in</a>.</p>
+{{!-- Danyals Code --}}
 
-        {{/if}}
-      </div>
+<div id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+
+                {{#if user}}
+                <a href="/logout" class="btn btn-success">Log Out</a>
+                <a href="/users" class="btn btn-success">Users</a>
+                {{else}}
+                <p>Please <a href="/login">log in</a>.</p>
+                {{/if}}
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+{{!-- Header and Search --}}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">MYFLIX</h1>
+        <p class="lead">Start your movie search below.</p>
+        <form class="d-flex justify-content-center">
+
+            <!-- This button will trigger our AJAX call -->
+            <input id="find-movie" type="submit" value="Movie Search">
+            <input type="text" id="movie-input"><br>
+        </form>
+    </div>
+</div>
+
+{{!-- Display Movies --}}
+
+
+<div class="container">
+    <div class="col-12">
+
+        {{!-- arrow controls for carousel --}}
+
+        <div id="moviecarousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+            <div class="carousel-inner" role="listbox">
+
+                <div class="carousel-item active">
+
+                    {{#each results.sample}}
+                    {{#if (contains1 @index)}}
+
+                    <div class="col-md-3" style="float:left">
+                        <div class="card mb-2">
+                            <img class="card-img-top card-sizing" src={{poster_path}} alt="Card image cap">
+                            <div class="card-body">
+                                {{!-- <h4 class="card-title">{{title}}</h4> --}}
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn btn-primary buttontype" data-buttontype="thumbsup"
+                                        data-movieid={{id}}>
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </a>
+                                    <a class="btn btn-warning buttontype" data-buttontype="watchlist"
+                                        data-movieid={{id}}>
+                                        <i class="fas fa-plus"></i>
+                                        <i class="fas fa-list"></i>
+                                    </a>
+                                    <a class="btn btn-danger buttontype" data-buttontype="thumbsdown"
+                                        data-movieid={{id}}>
+                                        <i class="fas fa-thumbs-down"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+
+                <div class="carousel-item">
+
+                    {{#each results.sample}}
+                    {{#if (contains2 @index)}}
+
+                    <div class="col-md-3" style="float:left">
+                        <div class="card mb-2">
+                            <img class="card-img-top card-sizing" src={{poster_path}} alt="Card image cap">
+                            <div class="card-body">
+                                {{!-- <h4 class="card-title">{{title}}</h4> --}}
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn btn-primary buttontype" data-buttontype="thumbsup"
+                                        data-movieid={{id}}>
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </a>
+                                    <a class="btn btn-warning buttontype" data-buttontype="watchlist"
+                                        data-movieid={{id}}>
+                                        <i class="fas fa-plus"></i>
+                                        <i class="fas fa-list"></i>
+                                    </a>
+                                    <a class="btn btn-danger buttontype" data-buttontype="thumbsdown"
+                                        data-movieid={{id}}>
+                                        <i class="fas fa-thumbs-down"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{!-- Footer --}}
+
+<img
+    src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Fluid jumbotron</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
 </div>
