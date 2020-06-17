@@ -30,13 +30,27 @@ $(document).ready(function () {
       $.ajax("/api/fullmovie/" +movie ,{
         type: "GET"
       }).then(function (response) {
-          // post to likes table
-          // $.ajax("/api/movies/", {
-          //   type: "POST",
-          //   data: data
-          // }).then(
-          //   console.log("posted to Likes table")
-          // )
+        // console.log(response);
+        //response.homepage
+        //response.id
+        //response.title
+        //response.poster_path$
+        //response.vote_average
+        //respnse.overview
+        let data = {
+          movieId: response.id,
+          poster: `http://image.tmdb.org/t/p/w154${response.posterPath}`,
+          overview: response.overview,
+          title: response.title,
+          homepage: response.homepage
+        }
+
+          $.ajax("/api/moviesdb/", {
+            type: "POST",
+            data: data
+          }).then(
+            console.log("posted to Movie DB")
+          )
       })  
 
       
@@ -127,33 +141,33 @@ $(document).ready(function () {
   }
 
   // refreshExamples gets new examples from the db and repopulates the list
-  let refreshExamples = function () {
-    API.getExamples().then(function (data) {
-      var $examples = data.map(function (example) {
-        var $a = $("<a>")
-          .text(example.text)
-          .attr("href", "/example/" + example.id);
+  // let refreshExamples = function () {
+  //   API.getExamples().then(function (data) {
+  //     var $examples = data.map(function (example) {
+  //       var $a = $("<a>")
+  //         .text(example.text)
+  //         .attr("href", "/example/" + example.id);
 
-        var $li = $("<li>")
-          .attr({
-            class: "list-group-item",
-            "data-id": example.id
-          })
-          .append($a);
+  //       var $li = $("<li>")
+  //         .attr({
+  //           class: "list-group-item",
+  //           "data-id": example.id
+  //         })
+  //         .append($a);
 
-        var $button = $("<button>")
-          .addClass("btn btn-danger float-right delete")
-          .text("ｘ");
+  //       var $button = $("<button>")
+  //         .addClass("btn btn-danger float-right delete")
+  //         .text("ｘ");
 
-        $li.append($button);
+  //       $li.append($button);
 
-        return $li;
-      });
+  //       return $li;
+  //     });
 
-      $exampleList.empty();
-      $exampleList.append($examples);
-    });
-  };
+  //     $exampleList.empty();
+  //     $exampleList.append($examples);
+  //   });
+  // };
 
   // Instructor Code
   // handleFormSubmit is called whenever we submit a new example
@@ -196,7 +210,7 @@ $(document).ready(function () {
   // Add event listeners to the submit and delete buttons
   // Instructor Code
   // $submitBtn.on("click", handleFormSubmit);  
-  $exampleList.on("click", ".delete", handleDeleteBtnClick);
+  //$exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 
   // Group Project generated

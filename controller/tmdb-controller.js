@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const axios = require("axios");
+const db = require("../models");
 // const passport = require("passport");
 
 router.get("/api/email", (req, res)=>{
@@ -23,7 +24,6 @@ router.get("/api/fullmovie/:movie", async (req, res)=>{
     res.json(fulldetails.data);
     // res.json(fulldetails);
 });
-
 
 
 router.get("/api/movies", async (req, res) => {
@@ -73,6 +73,12 @@ router.get("/api/movies", async (req, res) => {
 
     res.render("index", { results: tenResultsObj });  // ajax hijacks render
 });
+
+router.post("/api/moviesdb", async (req, res)=>{
+    const data = await db.moviesdbs.create(req.body);
+  
+    res.json(data);
+})
 
 module.exports = router;
 
