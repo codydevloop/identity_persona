@@ -11,6 +11,11 @@ $(document).ready(function () {
   let $exampleList = $("#example-list");
   let $findMovie = $("#find-movie");
 
+  let $homeButton = $("#homebutton");
+  let $dislikesButton = $("#dislikesbutton");
+  let $likesButton = $("#likesbutton");
+  let $watchListButton = $("#watchlistbutton");
+
   let $buttonTypeAndData = $(".buttontype");
 
 
