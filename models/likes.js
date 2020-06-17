@@ -1,7 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-    var Likes = sequelize.define('Likes', {
+    const Likes = sequelize.define('Likes', {
         movieId:{type:DataTypes.STRING},
  
     })
+    Likes.associate = (models) => {
+        Likes.belongsTo(models.Movies, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
     return Likes
 }

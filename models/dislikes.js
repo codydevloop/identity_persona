@@ -1,8 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-    var Dislikes = sequelize.define('Dislikes', {
+    const Dislikes = sequelize.define('Dislikes', {
 
         movieId:  {type:DataTypes.STRING},
 
     })
+    Dislikes.associate = (models) => {
+        Dislikes.belongsTo(models.Movies, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
     return Dislikes
 }
