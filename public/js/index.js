@@ -25,10 +25,26 @@ $(document).ready(function () {
     GETmovies: function (name) {
       window.location.href = `/api/movies?name=${name}`;
     },
+    // make call to TMDB to get full details
+    postMovies: function (movie){
+      $.ajax("/api/fullmovie/" +movie ,{
+        type: "GET"
+      }).then(function (response) {
+          // post to likes table
+          // $.ajax("/api/movies/", {
+          //   type: "POST",
+          //   data: data
+          // }).then(
+          //   console.log("posted to Likes table")
+          // )
+      })  
+
+      
+    },
 
     postLikes: function (table, movie) {
 
-
+      // ## get the user name, then post information to Like Table
       $.ajax("/api/email/", {
         type: "GET"
       }).then(function (response) {
@@ -38,15 +54,14 @@ $(document).ready(function () {
           movieId: movie,
           userEmail: response
         };
-
-        $.ajax("/api/likes/", {
-          type: "POST",
-          data: data
-        }).then(
-          console.log("done with like post")
-        )
-      })
-
+        // post to likes table
+          $.ajax("/api/likes/", {
+            type: "POST",
+            data: data
+          }).then(
+            console.log("posted to Likes table")
+          )
+      })  
     },
 
     // saveLikes: function ()
@@ -76,26 +91,30 @@ $(document).ready(function () {
     }
   };
   //##################################
-  //###############class defined
+  //############### Project #2 class defined
   //##################################
   function determineButton() {
     event.preventDefault();
     let tableIdentifier = $(this).attr("data-buttontype");
     let movieIdentifier = $(this).attr("data-movieid");
+    // console.log(tableIdentifier);
+    // console.log(movieIdentifier);
+
 
     switch (tableIdentifier) {
       case "thumbsup":
         API.postLikes(tableIdentifier, movieIdentifier)
+        API.postMovies(movieIdentifier)
         break;
 
       case "watchlist":
-        console.log(tableIdentifier);
-        console.log(movieIdentifier);
+        // console.log(tableIdentifier);
+        // console.log(movieIdentifier);
         break;
 
       case "thumbsdown":
-        console.log(tableIdentifier);
-        console.log(movieIdentifier);
+        // console.log(tableIdentifier);
+        // console.log(movieIdentifier);
         break;
     }
   }
@@ -182,6 +201,7 @@ $(document).ready(function () {
 
   // Group Project generated
   $findMovie.on("click", sugarSearch);
-  $buttonTypeAndData.on("click", determineButton);
+  $buttonTypeAndData.on("click", determineButton)
+
 
 });

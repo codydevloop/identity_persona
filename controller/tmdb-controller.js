@@ -6,10 +6,23 @@ const axios = require("axios");
 // const passport = require("passport");
 
 router.get("/api/email", (req, res)=>{
-    res.json(req.user.email);
+    res.send(req.user.email);
 });
 
+router.get("/api/fullmovie/:movie", async (req, res)=>{
+    let movie = req.params.movie;
+    // let searchTerm = 80;
 
+    const fulldetails = await
+        axios({
+            method: "GET",
+            url: `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY_TMDB}&language=en-US`
+
+        });
+    console.log(fulldetails.data);
+    res.json(fulldetails.data);
+    // res.json(fulldetails);
+});
 
 
 
