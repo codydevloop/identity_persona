@@ -1,17 +1,33 @@
 
 const express = require("express");
 const router = express.Router();
-const db = require("../models");
 require("dotenv").config();
-const axios = require("axios").default;
+const axios = require("axios");
+const db = require("../models");
+// const passport = require("passport");
 
+router.get("/api/email", (req, res)=>{
+    res.send(req.user.email);
+});
 
+router.get("/api/fullmovie/:movie", async (req, res)=>{
+    let movie = req.params.movie;
+    // let searchTerm = 80;
 
+    const fulldetails = await
+        axios({
+            method: "GET",
+            url: `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY_TMDB}&language=en-US`
 
+        });
+    // console.log(fulldetails.data);
+    res.json(fulldetails.data);
+    // res.json(fulldetails);
+});
 
-
-
-router.get("/movies", async (req, res) => {
+// two calls to TMDB - one list of genres sent to handbars for display
+router.get("/api/movies", async (req, res) => {
+    // console.log(req.user.dataValues.email);
     const searchTerm = req.query.name;
 
     const data = await
@@ -53,10 +69,32 @@ router.get("/movies", async (req, res) => {
 
 
     // console.log(tenResults);
-
+    //console.log("User info: " +req.user);
 
     res.render("index", { results: tenResultsObj });  // ajax hijacks render
 });
+
+router.post("/api/moviesdb", async (req, res)=>{
+    const data = await db.moviesdbs.create(req.body);
+  
+    res.json(data);
+});
+
+router.get("/api/userlikes/:email", async (req, res)=>{
+    let email = req.params.email;
+    // const query = {
+    //   userEmail: email
+    // };
+
+    const data = await db.likes.findAll({
+        where: {
+            userEmail: email
+        },
+        include: [db.moviesdbs]
+      });
+  
+     res.json(data);
+  });
 
 module.exports = router;
 

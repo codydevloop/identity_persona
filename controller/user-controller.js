@@ -3,6 +3,8 @@ const passport = require("passport");
 const router = express.Router();
 const db = require("../models");
 
+
+
 // Passport
 require("../config/passport")(passport);
 router.use(passport.initialize());
@@ -11,9 +13,11 @@ router.use(passport.session());
 router.get("/users", async (req, res) => {
   try {
     if (req.user) {
+
       const data = await db.user.findAll();
 
-      res.render("user", { users: data });
+        res.render("user", {users :data});
+
     } else {
       res.redirect("/login");
     }
@@ -77,5 +81,12 @@ router.delete(
     }
   }
 );
+
+
+
+
+
+
+
 
 module.exports = router;

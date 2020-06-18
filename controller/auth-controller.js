@@ -8,12 +8,13 @@ const router = express.Router();
 const db = require("../models");
 const jwtSecret = require("../config/jwt-config");
 
-const genreDBobj = require("./tmdb-controller");
+
+
 
 // Flash
 router.use(
   session({
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 120000 },
     secret: "wootwoot",
     saveUninitialized: true,
     resave: true
@@ -29,14 +30,16 @@ router.use(cookieParser());
 
 router.get("/", (req, res) => {
   if (req.user) {
-    res.render("index", { user: req.user });
+
+      res.render("index", { user: req.user });
+    
   } else {
     res.redirect("/login");
   }
 });
 
 router.get("/login", (req, res) => {
-  console.log("/login");
+  //console.log("/login");
   res.render("login", { message: req.flash("error") });
 });
 
@@ -49,7 +52,7 @@ router.post(
   (req, res) => {
     const payload = {
       email: req.user.email,
-      expires: Date.now() + parseInt(60000)
+      expires: Date.now() + parseInt(120000)
     };
 
     req.login(payload, { session: false }, error => {
@@ -92,5 +95,7 @@ router.get("/logout", async (req, res) => {
   res.clearCookie("jwt");
   res.redirect("/");
 });
+
+
 
 module.exports = router;
