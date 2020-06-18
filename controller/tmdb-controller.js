@@ -20,12 +20,12 @@ router.get("/api/fullmovie/:movie", async (req, res)=>{
             url: `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY_TMDB}&language=en-US`
 
         });
-    console.log(fulldetails.data);
+    // console.log(fulldetails.data);
     res.json(fulldetails.data);
     // res.json(fulldetails);
 });
 
-
+// two calls to TMDB - one list of genres sent to handbars for display
 router.get("/api/movies", async (req, res) => {
     // console.log(req.user.dataValues.email);
     const searchTerm = req.query.name;
@@ -78,7 +78,23 @@ router.post("/api/moviesdb", async (req, res)=>{
     const data = await db.moviesdbs.create(req.body);
   
     res.json(data);
-})
+});
+
+router.get("/api/userlikes/:email", async (req, res)=>{
+    let email = req.params.email;
+    // const query = {
+    //   userEmail: email
+    // };
+
+    const data = await db.likes.findAll({
+        where: {
+            userEmail: email
+        },
+        include: [db.moviesdbs]
+      });
+  
+     res.json(data);
+  });
 
 module.exports = router;
 

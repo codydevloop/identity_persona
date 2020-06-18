@@ -16,6 +16,15 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
+    Likes.associate = (models) => {
+        Likes.belongsTo(models.moviesdbs, {
+          foreignKey: {
+            name: "movieId",
+            allowNull: true
+          }
+        });
+      };
+
     return Likes;
 };
 

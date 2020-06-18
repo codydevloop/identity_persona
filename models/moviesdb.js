@@ -24,6 +24,16 @@ module.exports = (sequelize, DataTypes) => {
             }
         });
 
+        Moviesdbs.associate = (models) => {
+            Moviesdbs.hasMany(models.likes, {
+              foreignKey: {
+                name: "movieId",
+                allowNull: true
+              }
+            });
+          };
+
+
     return Moviesdbs;
 };
 

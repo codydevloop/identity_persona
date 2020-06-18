@@ -25,11 +25,11 @@ $(document).ready(function () {
 
     //Esme -- performs call to controller to perfrm tmdb search and returns movie object
 
-
+    // perform genre search for given movie title
     GETmovies: function (name) {
       window.location.href = `/api/movies?name=${name}`;
     },
-    // make call to TMDB to get full details
+    // make call to TMDB to get full details then post results to moviedb
     postMovies: function (movie){
       $.ajax("/api/fullmovie/" +movie ,{
         type: "GET"
@@ -47,16 +47,17 @@ $(document).ready(function () {
             type: "POST",
             data: data
           }).then(
-            console.log("posted to Movie DB")
+            //console.log("posted to Movie DB")
           )
       })  
 
       
     },
 
+    // post movie information to movie Table, after completing API call
     postLikes: function (table, movie) {
 
-      // ## get the user name, then post information to Like Table
+      
       $.ajax("/api/email/", {
         type: "GET"
       }).then(function (response) {
@@ -76,10 +77,20 @@ $(document).ready(function () {
       })  
     },
 
-    // saveLikes: function ()
+    showLikesList: function(){
 
-    // Start Danyal expamples
-    // 
+      $.ajax("/api/email/", {
+        type: "GET"
+      }).then(function (response) {
+        let email = response;
+        // console.log(response);
+        $.ajax("/api/userlikes/"+email, {
+          type: "GET"
+        }).then( function(res) {
+          console.log(res)
+        })
+      }) 
+    }
   };
   //##################################
   //############### Project #2 class defined
@@ -121,7 +132,8 @@ $(document).ready(function () {
 
   // Group Project generated
   $findMovie.on("click", sugarSearch);
-  $buttonTypeAndData.on("click", determineButton)
+  $buttonTypeAndData.on("click", determineButton);
+  $likesButton.on("click", API.showLikesList);
 
 
 });
