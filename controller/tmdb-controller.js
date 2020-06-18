@@ -44,7 +44,7 @@ router.get("/api/movies", async (req, res) => {
     const genres = await
         axios({
             method: 'GET',
-            url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY_TMDB}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}`
+            url: `https://api.themoviedb.org/3/discover/movie?api_key=030e18c98f251ca915449d70a8c436cf&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}`
 
         });
     // console.log(genres);
