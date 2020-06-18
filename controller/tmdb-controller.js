@@ -17,7 +17,7 @@ router.get("/api/fullmovie/:movie", async (req, res)=>{
     const fulldetails = await
         axios({
             method: "GET",
-            url: `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY_TMDB}&language=en-US`
+            url: `https://api.themoviedb.org/3/movie/${movie}?api_key=030e18c98f251ca915449d70a8c436cf&language=en-US`
 
         });
     // console.log(fulldetails.data);
@@ -33,7 +33,7 @@ router.get("/api/movies", async (req, res) => {
     const data = await
         axios({
             method: "GET",
-            url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY_TMDB}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
+            url: `https://api.themoviedb.org/3/search/movie?api_key=030e18c98f251ca915449d70a8c436cf&language=en-US&query=${searchTerm}&page=1&include_adult=false`
 
         });
 
