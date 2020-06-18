@@ -97,14 +97,3 @@ router.get("/api/userlikes/:email", async (req, res)=>{
   });
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
- 
-
