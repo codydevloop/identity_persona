@@ -80,20 +80,29 @@ router.post("/api/moviesdb", async (req, res)=>{
     res.json(data);
 });
 
-router.get("/api/userlikes/:email", async (req, res)=>{
-    let email = req.params.email;
-    // const query = {
-    //   userEmail: email
-    // };
+router.get("/api/userlikes", async (req, res)=>{
 
-    const data = await db.likes.findAll({
+ 
+    // console.log(req.query.email);
+
+
+    const data = await db.moviesdbs.findAll({
         where: {
-            userEmail: email
+            email: req.query.email
         },
-        include: [db.moviesdbs]
+        include: [db.likes]
       });
+
+
+    // for (let i = 0; i < data.length; i++){
+    
+    //     console.log(data[i].action);
+    // }
+
+
+
   
-     res.json(data);
+     res.render("displaylike", { movie: data } );
   });
 
 module.exports = router;

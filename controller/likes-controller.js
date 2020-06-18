@@ -10,8 +10,11 @@ router.post("/api/likes", async (req, res) =>{
     // passport.authenticate("jwt", { session: false }),
     // console.log(req.body);
     const data = await db.likes.create(req.body);
+
+    //console.log(req.body);
   
-    res.json(data);
+    // res.json(data);
+    res.send("post completed");
 
 });
 

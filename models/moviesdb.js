@@ -14,25 +14,41 @@ module.exports = (sequelize, DataTypes) => {
                 type:DataTypes.STRING
             },
             overview: {
-                type:DataTypes.STRING
+                type:DataTypes.STRING(1024)
             },
             title: {
                 type:DataTypes.STRING
             },
             homepage: {
                 type:DataTypes.STRING
+            },
+            action: {
+                type:DataTypes.STRING
+              },
+            email: {
+                type:DataTypes.STRING
             }
+
         });
-
         Moviesdbs.associate = (models) => {
-            Moviesdbs.hasMany(models.likes, {
-              foreignKey: {
-                name: "movieId",
-                allowNull: true
-              }
+            Moviesdbs.hasOne(models.likes, {
+                foreignKey: {
+                    name: "email",
+                    allowNull: true
+                }
             });
-          };
-
+        };
+        
+        // Moviesdbs.associate = (models) => {
+        //   Moviesdbs.hasOne(models.watchlater, {
+        //     foreignKey: {
+        //       name: "email",
+        //       allowNull: true
+        //     }
+        //   });
+        // };
+        
+        
 
     return Moviesdbs;
 };

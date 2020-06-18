@@ -1,0 +1,40 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+
+                {{#if user}}
+                <a href="/logout" class="btn btn-success">Log Out</a>
+                <a href="/users" class="btn btn-success">Users</a>
+                {{else}}
+                {{!-- <p>Please <a href="/login">log in</a>.</p> --}}
+                {{/if}}
+                <a href="/" class="btn btn-success" id="homebutton">Back to Search</a>
+                <a class="btn btn-success" id="dislikesbutton">Disikes</a>
+                <a class="btn btn-success" id="watchlistbutton">WatchList</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Movie Title</th>
+      <th scope="col">Homepage</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  {{#each movie}}
+  <tbody>
+    <tr>
+      <td>{{email}}</td>
+      <td>{{title}}</td>
+      <td><a href= "{{homepage}}">{{homepage}}</a></td>
+      <td>{{action}}</td>
+    </tr>
+  </tbody>
+  {{/each}}
+</table>

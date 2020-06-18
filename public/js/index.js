@@ -30,26 +30,35 @@ $(document).ready(function () {
       window.location.href = `/api/movies?name=${name}`;
     },
     // make call to TMDB to get full details then post results to moviedb
-    postMovies: function (movie){
-      $.ajax("/api/fullmovie/" +movie ,{
+    postMovies: function (action, movie){
+
+      $.ajax("/api/email/", {
         type: "GET"
-      }).then(function (response) {
+      }).then(function (email) {
 
-        let data = {
-          movieId: response.id,
-          poster: `http://image.tmdb.org/t/p/w154${response.posterPath}`,
-          overview: response.overview,
-          title: response.title,
-          homepage: response.homepage
-        }
 
-          $.ajax("/api/moviesdb/", {
-            type: "POST",
-            data: data
-          }).then(
-            //console.log("posted to Movie DB")
-          )
-      })  
+        $.ajax("/api/fullmovie/" +movie ,{
+          type: "GET"
+        }).then(function (response) {
+
+          let data = {
+            movieId: response.id,
+            poster: `http://image.tmdb.org/t/p/w154${response.posterPath}`,
+            overview: response.overview,
+            title: response.title,
+            homepage: response.homepage,
+            email: email,
+            action: action
+          }
+
+            $.ajax("/api/moviesdb/", {
+              type: "POST",
+              data: data
+            }).then(
+              //console.log("posted to Movie DB")
+            )
+        })  
+      });
 
       
     },
@@ -63,7 +72,7 @@ $(document).ready(function () {
       }).then(function (response) {
 
         let data = {
-          table: table,
+          action: table,
           movieId: movie,
           userEmail: response
         };
@@ -77,18 +86,21 @@ $(document).ready(function () {
       })  
     },
 
-    showLikesList: function(){
+    showLikesList: function(value){
 
       $.ajax("/api/email/", {
         type: "GET"
       }).then(function (response) {
-        let email = response;
+
+
+        window.location.href = `/api/userlikes?email=${response}`;
         // console.log(response);
-        $.ajax("/api/userlikes/"+email, {
-          type: "GET"
-        }).then( function(res) {
-          console.log(res)
-        })
+        // $.ajax("/api/userlikes/", {
+        //   type: "GET",
+        //   data : data
+        // }).then( function(res) {
+        //   console.log(res)
+        // })
       }) 
     }
   };
@@ -101,24 +113,25 @@ $(document).ready(function () {
     let movieIdentifier = $(this).attr("data-movieid");
     // console.log(tableIdentifier);
     // console.log(movieIdentifier);
+    API.postLikes(tableIdentifier, movieIdentifier)
+    API.postMovies(tableIdentifier, movieIdentifier)
 
 
-    switch (tableIdentifier) {
-      case "thumbsup":
-        API.postLikes(tableIdentifier, movieIdentifier)
-        API.postMovies(movieIdentifier)
-        break;
 
-      case "watchlist":
-        // console.log(tableIdentifier);
-        // console.log(movieIdentifier);
-        break;
+    // switch (tableIdentifier) {
+    //   case "thumbsup":
+    //     API.postLikes(tableIdentifier, movieIdentifier)
+    //     API.postMovies(movieIdentifier)
+    //     break;
 
-      case "thumbsdown":
-        // console.log(tableIdentifier);
-        // console.log(movieIdentifier);
-        break;
-    }
+    //   case "watchlist":
+
+    //     break;
+
+    //   case "thumbsdown":
+
+    //     break;
+    // }
   }
 
   function sugarSearch() {
@@ -133,7 +146,11 @@ $(document).ready(function () {
   // Group Project generated
   $findMovie.on("click", sugarSearch);
   $buttonTypeAndData.on("click", determineButton);
-  $likesButton.on("click", API.showLikesList);
+  $likesButton.on("click", function() {
+    let value =1;
+    API.showLikesList(value);
+  }); 
+    
 
 
 });

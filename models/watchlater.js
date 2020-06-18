@@ -1,8 +1,26 @@
 module.exports = (sequelize, DataTypes) => {
-    var Watchlater = sequelize.define('Watchlater', {
+    const Watchlater = sequelize.define(
+        "watchlater", 
+        {
 
-        movieId:{type:DataTypes.STRING},
+        id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true
+        },
+        movieId: {
+            type:DataTypes.INTEGER,
+            primaryKey: true
+        },
+        userEmail: {
+            type:DataTypes.STRING
+        }
 
-    })
-    return Watchlater
-}
+    });
+
+    // Watchlater.associate = (models) => {
+    //     Watchlater.belongsTo(models.moviesdbs);
+    //   };
+
+    return Watchlater;
+};
