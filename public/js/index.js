@@ -90,13 +90,15 @@ $(document).ready(function () {
       $.ajax("/api/email/", {
         type: "GET"
       }).then(function (response) {
-        let email = response;
+        // let data  = {email: response};
+        window.location.href = `/api/userlikes?email=${response}`;
         // console.log(response);
-        $.ajax("/api/userlikes/"+email, {
-          type: "GET"
-        }).then( function(res) {
-          console.log(res)
-        })
+        // $.ajax("/api/userlikes/", {
+        //   type: "GET",
+        //   data : data
+        // }).then( function(res) {
+        //   console.log(res)
+        // })
       }) 
     }
   };
