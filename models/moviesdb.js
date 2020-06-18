@@ -22,21 +22,33 @@ module.exports = (sequelize, DataTypes) => {
             homepage: {
                 type:DataTypes.STRING
             },
+            action: {
+                type:DataTypes.STRING
+              },
             email: {
                 type:DataTypes.STRING
             }
 
         });
-
         Moviesdbs.associate = (models) => {
             Moviesdbs.hasOne(models.likes, {
-              foreignKey: {
-                name: "email",
-                allowNull: true
-              }
+                foreignKey: {
+                    name: "email",
+                    allowNull: true
+                }
             });
-          };
-
+        };
+        
+        // Moviesdbs.associate = (models) => {
+        //   Moviesdbs.hasOne(models.watchlater, {
+        //     foreignKey: {
+        //       name: "email",
+        //       allowNull: true
+        //     }
+        //   });
+        // };
+        
+        
 
     return Moviesdbs;
 };

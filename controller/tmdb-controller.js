@@ -81,12 +81,10 @@ router.post("/api/moviesdb", async (req, res)=>{
 });
 
 router.get("/api/userlikes", async (req, res)=>{
-    //let email = req.query.email;
-    // console.log(req.query.email);
+
  
-    // const query = {
-    //   userEmail: email
-    // };
+    // console.log(req.query.email);
+
 
     const data = await db.moviesdbs.findAll({
         where: {
@@ -94,6 +92,15 @@ router.get("/api/userlikes", async (req, res)=>{
         },
         include: [db.likes]
       });
+
+
+    // for (let i = 0; i < data.length; i++){
+    
+    //     console.log(data[i].action);
+    // }
+
+
+
   
      res.render("displaylike", { movie: data } );
   });
