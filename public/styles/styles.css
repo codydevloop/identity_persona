@@ -1,3 +1,7 @@
+body{
+  background-color:  #c2083c;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -16,6 +20,9 @@ img {
 
 .card-img-top .card-sizing{
 
+}
+#jumbot{
+  background-color: #c2083c;
 }
 
 

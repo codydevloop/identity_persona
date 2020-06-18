@@ -3,19 +3,17 @@
 <div>
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-4">
 
 
-                {{#if user}}
+
                 <a href="/logout" class="btn btn-success">Log Out</a>
-                <a href="/users" class="btn btn-success">Users</a>
-                {{else}}
-                <p>Please <a href="/login">log in</a>.</p>
-                {{/if}}
-                <button class="btn btn-success" id="homebutton">Back to Search</button>
-                <button class="btn btn-success" id="likesbutton">Likes</button>
-                <button class="btn btn-success" id="dislikesbutton">Disikes</button>
-                <button class="btn btn-success" id="watchlistbutton">WatchList</button>
+                {{!-- <a href="/users" class="btn btn-success">Users</a> --}}
+                {{!-- <p>Please <a href="/login">log in</a>.</p> --}}
+                {{!-- <button class="btn btn-success" id="homebutton">Back to Search</button> --}}
+                <button class="btn btn-success" id="likesbutton">Results</button>
+                {{!-- <button class="btn btn-success" id="dislikesbutton">Disikes</button>
+                <button class="btn btn-success" id="watchlistbutton">WatchList</button> --}}
             </div>
         </div>
     </div>
@@ -23,7 +21,7 @@
 
 {{!-- Header and Search --}}
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid" id="jumbot">
     <div class="container">
         <h1 class="display-4">MYFLIX</h1>
         <p class="lead">Start your movie search below.</p>
@@ -45,6 +43,8 @@
         {{!-- arrow controls for carousel --}}
 
         <div id="moviecarousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+
 
             {{!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -120,19 +120,29 @@
                     {{/if}}
                     {{/each}}
                 </div>
+                <a class="carousel-control-prev" href="#moviecarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#moviecarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-
         </div>
+        <br>
+        <br>
+        <img
+            src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
     </div>
 </div>
 
 {{!-- Footer --}}
 
-<img
-    src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg">
-<div class="jumbotron jumbotron-fluid">
+
+{{!-- <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Fluid jumbotron</h1>
         <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
     </div>
-</div>
+</div> --}}
