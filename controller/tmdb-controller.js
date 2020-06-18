@@ -86,11 +86,11 @@ router.get("/api/userlikes/:email", async (req, res)=>{
     //   userEmail: email
     // };
 
-    const data = await db.likes.findAll({
+    const data = await db.moviesdbs.findAll({
         where: {
-            userEmail: email
+            email: email
         },
-        include: [db.moviesdbs]
+        include: [db.likes]
       });
   
      res.json(data);

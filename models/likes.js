@@ -2,13 +2,9 @@ module.exports = (sequelize, DataTypes) => {
     const Likes = sequelize.define(
         "likes", 
         {
-            id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true
-            },
             movieId: {
-                type:DataTypes.INTEGER
+                type:DataTypes.INTEGER,
+                primaryKey: true
             },
             userEmail: {
                 type:DataTypes.STRING
@@ -18,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
 
     Likes.associate = (models) => {
         Likes.belongsTo(models.moviesdbs, {
-          foreignKey: {
-            name: "movieId",
-            allowNull: true
-          }
+          // foreignKey: {
+          //   name: "movieId",
+          //   allowNull: true
+          // }
         });
       };
 

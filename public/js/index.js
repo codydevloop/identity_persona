@@ -31,25 +31,33 @@ $(document).ready(function () {
     },
     // make call to TMDB to get full details then post results to moviedb
     postMovies: function (movie){
-      $.ajax("/api/fullmovie/" +movie ,{
+
+      $.ajax("/api/email/", {
         type: "GET"
-      }).then(function (response) {
+      }).then(function (email) {
 
-        let data = {
-          movieId: response.id,
-          poster: `http://image.tmdb.org/t/p/w154${response.posterPath}`,
-          overview: response.overview,
-          title: response.title,
-          homepage: response.homepage
-        }
 
-          $.ajax("/api/moviesdb/", {
-            type: "POST",
-            data: data
-          }).then(
-            //console.log("posted to Movie DB")
-          )
-      })  
+        $.ajax("/api/fullmovie/" +movie ,{
+          type: "GET"
+        }).then(function (response) {
+
+          let data = {
+            movieId: response.id,
+            poster: `http://image.tmdb.org/t/p/w154${response.posterPath}`,
+            overview: response.overview,
+            title: response.title,
+            homepage: response.homepage,
+            email: email
+          }
+
+            $.ajax("/api/moviesdb/", {
+              type: "POST",
+              data: data
+            }).then(
+              //console.log("posted to Movie DB")
+            )
+        })  
+      });
 
       
     },

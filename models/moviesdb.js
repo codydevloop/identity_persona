@@ -14,20 +14,24 @@ module.exports = (sequelize, DataTypes) => {
                 type:DataTypes.STRING
             },
             overview: {
-                type:DataTypes.STRING
+                type:DataTypes.STRING(1024)
             },
             title: {
                 type:DataTypes.STRING
             },
             homepage: {
                 type:DataTypes.STRING
+            },
+            email: {
+                type:DataTypes.STRING
             }
+
         });
 
         Moviesdbs.associate = (models) => {
-            Moviesdbs.hasMany(models.likes, {
+            Moviesdbs.hasOne(models.likes, {
               foreignKey: {
-                name: "movieId",
+                name: "email",
                 allowNull: true
               }
             });
