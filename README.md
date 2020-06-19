@@ -1,56 +1,25 @@
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
-[![Build Status](https://travis-ci.com/sdanyalk/auth-project-two.svg?branch=master)](https://travis-ci.com/sdanyalk/auth-project-two)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](license)
+## Name
 
-# Authentication for Project Two
-This project showcases how to add authentication using `passport.js` library. Template for this project is the starter template given for Project Two.
+The Movide DB
 
-`passport.js` provides many authentication strategies. This project makes use of **local** username and password authentication strategy. More details about this strategy can be found [here](http://www.passportjs.org/packages/passport-local/).
+---
 
-Passport Local strategy expects you to have username and password stored in your database. In this project I'm using email address as a username. The passwords are stored as a hash using **bcrypt**.
+## Description
 
-**Version 2** of this project includes securing the API routes by using passport js **JWT strategy**. More about JWT-passport strategy can be found [here](http://www.passportjs.org/packages/passport-jwt/).
+The Movie DB is a movie recommendation website that let's helps you create a list of movie titles, each identified by Likes, Dislikes, and Watch List.
+
+"Thumbs Up" represent movies that you wish to influence the outcome of future searches so that your results are tailored more to your interests.
+
+"Thumbs Down" represent movies that you wish to both not be returned in future searches or influence future searches.
+
+Watch List represents movies that you plan to watch in the future
 
 ---
 
 ## Usage
 
-You are most welcome to use this project as a starter code for your project-2. You have my full permission, and blessing.
+Simply sign up to begin, then use the search bar to search a movie title and get a list of movies related to your search. Once you have results, you can click: the blue button to add it to your list as a "Thumbs Up" movie, the red button to add it to your list as a "Thumbs Down" movie, and the yellow button to add it to your list as a "Watchlist" movie,
 
-To show this, I've published this project as a github *template* project. On the top, just before `Clone or download` button you will see a green `Use this template` button. This will allow you to create your own project based off this starter code project. So instead of cloning or forking, that is what I will recommend doing.
-
----
-
-## Installation
-
-1. Clone this repository.
-    ```
-    git clone https://github.com/sdanyalk/auth-project-two.git
-    ```
-1. Navigate into the cloned directory.
-    ```
-    cd auth-project-two
-    ```
-1. Install Nodejs dependencies.
-    ```
-    npm install
-    ```
-1. Create mysql database using the `schema.sql` file, located below.
-    ```
-    /db/schema.sql
-    ```
-1. Update database username and password configuration in `config.json` file, located below.
-    ```
-    /config/config.json
-    ```
-1. In the root directory of the project, start the server.
-    ```
-    node server.js
-    ```
-1. In your browser navigate to the following page.
-    ```
-    http://localhost:8080
-    ```
 ---
 
 ## NPM Packages
@@ -66,38 +35,3 @@ To show this, I've published this project as a github *template* project. On the
 | `bcrypt` | [BCrypt](https://www.npmjs.com/package/bcrypt) |
 | `connect-flash` | [Connect Flash for Express](https://www.npmjs.com/package/connect-flash) |
 | `dotenv` | [Dotenv](https://www.npmjs.com/package/dotenv) |
-
----
-
-## Heroku Deployment
-
-This project is deployed on Heroku. The link to web app is:
-
-[https://auth-project-two.herokuapp.com/](https://auth-project-two.herokuapp.com/)
-
----
-
-## Nice to have
-
-- [x] Secure the API endpoints by using JWT strategy in passport js.
-- [ ] Add Jest unit tests.
-
----
-
-## Troubleshooting
-
-| Issue | Resolution
-| ----------- | ----------- |
-| `bcrypt` node package failing to install on Windows 7/10 machines. | From the `bcrypt` documentation, there are extra installations required on Windows OS to make `bcrypt` work. This is listed under the [Dependencies](https://www.npmjs.com/package/bcrypt#dependencies) section. To complete the required Windows dependencies install the tools as mentioned [here](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows). Complete the previous step in GitBash (run as administrator).|
-
----
-
-## Issues/Bugs
-
-Please report any bugs [here](https://github.com/sdanyalk/auth-project-two/issues).
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
