@@ -25,7 +25,6 @@ router.get("/api/fullmovie/:movie", async (req, res)=>{
     // res.json(fulldetails);
 });
 
-// two calls to TMDB - one list of genres sent to handbars for display
 router.get("/api/movies", async (req, res) => {
     // console.log(req.user.dataValues.email);
     const searchTerm = req.query.name;
@@ -36,25 +35,29 @@ router.get("/api/movies", async (req, res) => {
             url: `https://api.themoviedb.org/3/search/movie?api_key=030e18c98f251ca915449d70a8c436cf&language=en-US&query=${searchTerm}&page=1&include_adult=false`
 
         });
+    //updated to targed movie id
+    let movieid = data.data.results[0].id;
+    // console.log(movieid);
+   
 
-    let genre = data.data.results[0].genre_ids[0];
+    // console.log(movieid);
 
-    // console.log(genre);
-
-    const genres = await
+    const recomemndations = await
         axios({
-            method: 'GET',
-            url: `https://api.themoviedb.org/3/discover/movie?api_key=030e18c98f251ca915449d70a8c436cf&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}`
+            method: "GET",
+            url: `https://api.themoviedb.org/3/movie/${movieid}/recommendations?api_key=030e18c98f251ca915449d70a8c436cf&language=en-US&page=1`
 
         });
     // console.log(genres);
     //call the genre search
+    console.log(recomemndations);
+
     //
     // reduces the result to managable size and adds poster path prefix
     let tenResults = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
 
-        tenResults.push(genres.data.results[i]);
+        tenResults.push(recomemndations.data.results[i]);
         tenResults[i].poster_path ="http://image.tmdb.org/t/p/w154"+tenResults[i].poster_path;
     }
 
