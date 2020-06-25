@@ -20,6 +20,10 @@ Watch List represents movies that you plan to watch in the future
 
 Simply sign up to begin, then use the search bar to search a movie title and get a list of movies related to your search. Once you have results, you can click: the blue button to add it to your list as a "Thumbs Up" movie, the red button to add it to your list as a "Thumbs Down" movie, and the yellow button to add it to your list as a "Watchlist" movie,
 
+Deployed https://github.com/codydevloop/identity_persona
+qqq@qqq.com
+qqqq
+
 ---
 
 ## NPM Packages
